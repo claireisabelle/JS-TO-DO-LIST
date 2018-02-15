@@ -129,9 +129,7 @@ ul.todo li{
 	padding: 14px 100px 14px 14px;
 }
 
-ul.todo li:last-of-type{
-	margin: 0px;
-}
+
 
 ul.todo li .buttons{
 	width: 100px;
@@ -197,8 +195,29 @@ ul.todo li .buttons button.complete svg{
 	border-radius: 11px;
 }
 
+
 ul.todo li .buttons button.complete svg .fill{
 	fill: #25b99a;
 }
 
+
+ul.todo li .buttons button.complete:hover svg {
+	background-color: rgba(37,185,154,0.5);
+}
+
+ul.todo li .buttons button.complete:hover svg .fill{
+	fill: #fff;
+}
+
+
+
+
+ul.todo#completed li .buttons button.complete svg{
+	background-color: #25b99a;
+	border: 0px;
+}
+
+ul.todo#completed li .buttons button.complete svg .fill{
+	fill: #fff;
+}
 
