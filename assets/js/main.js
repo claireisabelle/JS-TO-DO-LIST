@@ -21,6 +21,9 @@ document.getElementById('add').addEventListener('click', function(){
 
 	if(value){
 		addItemTodo(value);
+
+		// On réinitialise value pour ne pas sauver dans l'input la précédente valeur
+		document.getElementById('item').value = '';
 	}
 
 });
@@ -38,15 +41,24 @@ function addItemTodo(text){
 	var buttons = document.createElement('div');
 	buttons.classList.add('buttons');
 
+
 	// On crée le btn remove avec la classe button et on insère l'image SVG
 	var remove = document.createElement('button');
 	remove.classList.add('remove');
 	remove.innerHTML = removeSVG;
 
+	// Si on clique sur le bouton remove, on déclenche l'action liée
+	remove.addEventListener('click', removeItem);
+
+
 	// On crée le btn complete avec la classe button et on insère l'image SVG
 	var complete = document.createElement('button');
 	complete.classList.add('complete');
 	complete.innerHTML = completeSVG;
+
+	// Si on clique le bouton complete, on déclenche l'aciton liée
+	complete.addEventListener('click', completeItem);
+
 
 	// On insère dans la div buttons le btn remove et le btn complete
 	buttons.appendChild(remove);
@@ -58,4 +70,56 @@ function addItemTodo(text){
 	// On insère dans la ul : le li créé en première position (avant les autres taches créées)
 	list.insertBefore(item, list.childNodes[0]);
 
+}
+
+
+/*
+ *********************************
+	SUPPRIMER UNE TACHE
+ *********************************
+ */
+
+function removeItem(){
+	// On cible le parent du btn (la div button) puis le parent encore pour attraper la li
+	var li = this.parentNode.parentNode;
+
+	// On cible la ul au dessus
+	var ulParent = li.parentNode;
+
+	// On supprime la li du ul
+	ulParent.removeChild(li);
+
+}
+
+
+/*
+ *********************************
+	COMPLETER UNE TACHE
+ *********************************
+ */
+
+function completeItem(){
+	// On cible le parent du btn (la div button) puis le parent encore pour attraper la li
+	var li = this.parentNode.parentNode;
+
+	// On cible la ul au dessus
+	var ul = li.parentNode;
+
+	// On vérifie l'id de cette ul pour savoir si on est dans l'ul todo ou l'ul completed
+	var id = ul.id
+
+	var target;
+
+	if(id === 'todo'){
+		// C'est une tache à mettre dans completed
+		target = document.getElementById('completed');
+
+		target.insertBefore(li, target.childNodes[0]);
+
+	}else{
+		// C'est une tache à remettre dans les todo
+		target = document.getElementById('todo');
+
+		target.insertBefore(li, target.childNodes[0]);
+	}
 }

@@ -221,3 +221,27 @@ ul.todo#completed li .buttons button.complete svg .fill{
 	fill: #fff;
 }
 
+ul.todo#completed li{
+	color: rgba(0,0,0, 0.3);
+	font-style: italic;
+	background-color: rgba(255,255,255,0.5);
+}
+
+ul.todo#completed:not(:empty){
+	position: relative;
+	padding: 60px 0 0 0;
+}
+
+
+ul.todo#completed:not(:empty):before{
+	content: '';
+	width: 150px;
+	height: 1px;
+	background-color: #d8e5e0;
+	position: absolute;
+	top: 30px;
+	left: 50%;
+	margin: 0 0 0 -75px;
+
+}
+
